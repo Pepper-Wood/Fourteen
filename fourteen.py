@@ -1,11 +1,9 @@
-# Starting colors for terminal:
-# Green font: rgb(55,161,64)
-# Background: rgb(0,0,0)
-
-#It'd be great to have an online doc that python continually reads to assess
-# the damage to the ship or to the crew. Maybe hints at things too.
-
 import time
+import random
+
+PASSWORDS = {"bubbly":"this allows the user to shoot bubbles",
+             "black plague":"user automatically dies",
+             "ctrlaltdelete":"the control chamber door opens"}
 
 def update_progress(progress):
     # bar where each # represents 10%
@@ -14,7 +12,17 @@ def update_progress(progress):
     progress_bar = '\r[{0}] {1}%'.format('#'*(progress/5) + '-' * (20-(progress/5)), progress)
     return progress_bar
 
-#new goal: only show printed countdown when the % actually increments
+def transcription(docCode, langCode, pause):
+    if docCode == "12345" and langCode == "ENGLISH":
+        document = open('testpoem.txt', 'r')
+        for line in document:
+            print line,
+            time.sleep(pause)
+    elif docCode == "67890": # barbara document has all four languages written into it
+        print "$ ld: ERROR: multiple languages detected in document-'" + docCode + "'"
+    else:
+        print "$ ld: invalid match document-'" + docCode + "' and language-'" + langCode + "'"
+
 def waitafterpswd(total_time):
     countdown = total_time
     current_percent = 0
@@ -27,7 +35,7 @@ def waitafterpswd(total_time):
         countdown -= 1
         time.sleep(1)
     print "[####################] 100%"
-    print "\n\n\nLoading.......\n\n\n"
+    print "\nLoading.......\n"
     time.sleep(15)
 
 def errormessage(duration):
@@ -50,9 +58,6 @@ def errormessage(duration):
         print '/](?:(?:/rERROR/n)?[ /t])*)(?:/.(?:(?:/r/n)?[ /t])*(?:[^()&lt;&gt;@,;://"./[/] /000-/031]+(ERROR?:(?:(?:/r/n)?[/t]ERROR+|/Z|(?=[/["()&lt;&gt;@,;://"./[/]]))|/[([^/[/]/r',
         print '//]|//.)*/](?:(?:/r/n)?[ /t])*))*/&gt;(?:(?:/r/n)?[ /t])*)|(?:[^()&lt;&gt;@,;://"./[/] /000-/031]+(?:(?:(?:/r/n)?[ /t])+|/Z|(?=[/["()&lt;&gt;@,;://"./[/]]',
         print '))|"(?:[^/"/r//]|//.|(?:(?:/r/n)?[ /t]))*"(?:(?:/ERRORr/n)?[ /t])*)*:(?:(?:/r/n)?[/t])*(?:(?:(?:[^()&lt;&gt;@,;://"./[/] /000-/031]+(?:(?:(?:/r/n)?[ /t])+|/Z|(',
-        print 'ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR',
-        print 'ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR',
-        print 'ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR',
         print '?=[/["()&lt;&gt;@,;://"./[/]]))|"(?:[^ERROR/"/r//]|//.|(?:(?:/r/n)?[/t]))*"(?:(?:/r/n)?[/t])*)(?:/.(?:(?:/r/n)?[ /t])*(?:[^()&lt;&gt;@,;://"./[/] /000-/031]+(?',
         print ':(?:(?:ERROR/r/n)?[/t])+|/Z|(?=[/["()&lt;&gt;@,;://"./[/]]))|"(?:[^/"/r//]|//.|(?:(?:/r/n)?[ /t]))*"(?:(?:/r/n)?[ /t])*))*@(?:(?:/r/n)?[ /t])*(?:[^()&lt;&gt;@,',
         print ';://"./[/]/000-/031]+(?:(?:(?:/r/n)?[ /t])+|/Z|(?=[/["()&lt;&gt;@,;://"./[/]]))|/[([^/[/]/r//]|//.)*/](?:(?ERROR:/r/n)?[ /t])*)(?:/.(?:(?:/r/n)?[ /t])*(?:[^()&',
@@ -83,27 +88,24 @@ def errormessage(duration):
         print ' :(?:/r/n)?[ /t])*(?:[^()&lt;&gt;@,;://"./[/] /000-/031]+(?:(?:(?:/r/n)?[ /t])+|/Z|(?=[/["()&lt;&gt;@,;://"./[/]]))|/[([^/[/]/r//]|//.)*/](?:(?:/r/n)?[ /t]',
         print ' )*))*/&gt;(?:(?:/r/n)ERROR?[ /t])*))*)?;/s*)',
 
-def truepassword(pswd):
-    if pswd == "hi":
-        return "\n\nDUN DUN DUNNN"
-    else:
-        return "\n\nPassword invalid"
-
 # This will be implemented later to read from a google document
 # with information about the current condition of the ship
-def captainslog():
-    print "hi"
+def gmfunc(gmflag):
+    # The returned value alters at what point the status of the ship is.
+    if gmflag == "asdf":
+        return 2
 
-while True:
-    input = raw_input("\nc:/drchickengeorge/terminal_1/",)
-    if input == "password":
-        pswd = raw_input("c:/drchickengeorge/terminal_1/password/",)
-        if pswd == "barbara":
-            errormessage(20)
-            print "\n\nREBOOTING........\n"
-            waitafterpswd(280)
-        else:
-            waitafterpswd(10) #300 is 5 minutes in seconds
-        print truepassword(pswd)
+def roulettepassword():
+    print "$ ld: determining match...... "
+    waitafterpswd(10)
+    print "$ ls: Randomly selecting password. Loading...."
+    return random.choice(PASSWORDS.keys())
+    
+def truepassword(pswd):
+    if pswd == "barbara":
+        errormessage(5)
+        return "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+    elif pswd in PASSWORDS:
+        return PASSWORDS[pswd]
     else:
-        print "$ ld: unrecognized option '" + input + "'"
+        return "\n$ ld: invalid password-'" + pswd + "'"
