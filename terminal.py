@@ -83,13 +83,7 @@ while True:
 
     if input == "password":
         pswd = raw_input("c:/users/drchickengeorge/terminal_" + str(TERMINALNUMBER) + "/password/",).lower()
-        if pswd == "roulette":
-            pswd = fourteen.roulettepassword()
-            print "c:/users/drchickengeorge/terminal_" + str(TERMINALNUMBER) + "/password/" + pswd
-        print "$ ld: determining match...... "
-        waitafterpswd(10) #300 is 5 minutes in seconds
-        print fourteen.truepassword(pswd)
-
+        fourteen.passwordresult(pswd,TERMINALNUMBER)
 
     elif input == "translate":
         docCode = raw_input("c:/users/drchickengeorge/terminal_" + str(TERMINALNUMBER) + "/translate/enterDocumentCode/",).lower()
@@ -99,7 +93,6 @@ while True:
         waitafterpswd(10) #wait 1 minutes for transcription or testing if exists
         # the function will transcribe the translation of the cryptotext super slowly
         fourteen.transcription(docCode,langCode,3) # this can be in the separate python module too
-
 
     elif input == "listoptions":
         print "$ ld: listoptions - current options:"
